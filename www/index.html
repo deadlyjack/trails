@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: #141e3f;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+      }
+      canvas {
+        height: 600px;
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      height="600"
+      width="600"
+      data-options="
+        speed=2,
+        step-factor=1,
+        line-width=6,
+        color='#ff9988,#f66978,#6ff938,#9933ff,#3936ff'
+        "
+    ></canvas>
+
+    <script src="../dist/trails.js"></script>
+    <script>
+      (async () => {
+        const $canvas = document.getElementById('canvas');
+        const trails = await Trails.fromText(
+          'foxdebug',
+          './Lobster/Lobster-Regular.ttf',
+          $canvas
+        );
+        animation();
+
+        window.addEventListener('resize', trails.resize);
+
+        function animation() {
+          trails.update();
+          requestAnimationFrame(animation);
+        }
+      })();
+    </script>
+  </body>
+</html>

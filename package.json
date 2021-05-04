@@ -1,0 +1,28 @@
+{
+  "name": "trails",
+  "version": "1.0.0",
+  "description": "Library for creating trails like effect for svg images",
+  "main": "src/main.js",
+  "author": "Ajit Kumar <contact@ajitkumar.dev> (https://ajitkumar.dev)",
+  "homepage": "https://github.com/deadlyjack/trails",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "html-tag-js": "^1.0.1",
+    "irid": "^2.0.2",
+    "opentype.js": "^1.3.3",
+    "pathseg": "^1.2.0"
+  }
+}
