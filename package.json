@@ -1,5 +1,5 @@
 {
-  "name": "trails",
+  "name": "@deadlyjack/trails",
   "version": "1.0.0",
   "description": "Library for creating trails like effect for svg images",
   "main": "dist/main.js",
