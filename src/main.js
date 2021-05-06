@@ -145,11 +145,13 @@ export function Trails(SVGPath, canvas) {
       const tailsLen = trace.tails.length;
       if (tailsLen) {
         trace.tails.map((tail, i) => {
+          const randomIndex = Math.round(Math.random() * (irid.length - 1));
           let opacity = 1 - (i / tailsLen);
           opacity = opacity < 0.5 ? 0.5 : opacity;
           let color = Array.isArray(irid)
-            ? irid[parseInt(Math.random() * irid.length, 10)]
+            ? irid[randomIndex]
             : irid;
+
           color = color.opacity(opacity).toRGBString();
           clearLine(tail.x, tail.y, tail.oldX, tail.oldY);
           drawLine(
