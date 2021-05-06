@@ -2,7 +2,7 @@
   "name": "@deadlyjack/trails",
   "version": "1.0.3",
   "description": "Library for creating trails like effect for svg images",
-  "main": "dist/tails.js",
+  "main": "./dist/trails.js",
   "author": "Ajit Kumar <contact@ajitkumar.dev> (https://ajitkumar.dev)",
   "homepage": "https://github.com/deadlyjack/trails",
   "license": "MIT",
