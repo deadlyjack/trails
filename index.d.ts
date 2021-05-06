@@ -30,7 +30,7 @@ declare const Trails: {
    * @param fontSrc Font source, this font will to applied to the given text.
    * @param canvas Canvas element to draw the text.
    */
-  fromText(text:String, fontSrc: String, canvas: HTMLCanvasElement):TrailsObject;
+  fromText(text:String, fontSrc: String, canvas: HTMLCanvasElement):Promise<TrailsObject>;
   /**
    * Creates trails like effect for a given SVG image. SVG image should contain single path.
    * @param svg Content of the SVG file.
