@@ -6,6 +6,10 @@
   "author": "Ajit Kumar <contact@ajitkumar.dev> (https://ajitkumar.dev)",
   "homepage": "https://github.com/deadlyjack/trails",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deadlyjack/trails.git"
+  },
   "scripts": {
     "build": "webpack"
   },
