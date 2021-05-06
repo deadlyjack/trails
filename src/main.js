@@ -7,15 +7,16 @@ import Path from './path';
 import pathToVertices from './pathToVertices';
 import Trace from './trace';
 
+// TODO: add option for width of the line
+
 /**
- *
- * @param {SVGPathElement} points
- * @param {object} options
+ * 
+ * @param {SVGPathElement} SVGPath
  * @param {HTMLCanvasElement} canvas
  */
-export function Trails(points, canvas) {
+export function Trails(SVGPath, canvas) {
   if (!canvas) throw new Error('Canvas required');
-  const ctx = canvas.getContext('2d');
+  let ctx = canvas.getContext('2d');
   let { height, width } = canvas;
   let dpr = window.devicePixelRatio || 1;
   let path;
@@ -25,9 +26,8 @@ export function Trails(points, canvas) {
   let stepFactor = 4;
   let speed = 8;
   let scale = 1;
-  // let lineWidth = 1;
   let irid = Irid('#fff');
-  let vertices = extractVertices(points);
+  let vertices = extractVertices(SVGPath);
 
   reloadOptions();
   resize();
@@ -54,9 +54,6 @@ export function Trails(points, canvas) {
           case 'scale':
             scale = +val;
             break;
-          // case 'line-width':
-          //   lineWidth = +val;
-          //   break;
           case 'color':
             if (/,/.test(val)) {
               irid = val.replace(/'/g, '').split(',').map((value) => {
@@ -74,7 +71,7 @@ export function Trails(points, canvas) {
     }
   }
 
-  function positionCenter() {
+  function positionToCenter() {
     if (dpr !== 1) path.scale(dpr, dpr);
     path.translate((width * dpr) / 2 - path.dim.w / 2, (height * dpr) / 2 - path.dim.h / 2);
     vertices = path.vertices;
@@ -86,24 +83,11 @@ export function Trails(points, canvas) {
     dpr = window.devicePixelRatio;
     canvas.height = height * dpr;
     canvas.width = width * dpr;
-    // lineWidth *= dpr;
     path = new Path(vertices);
     path.scale(scale);
     path.resize(width * imageWidth, height * imageHeight);
-    positionCenter();
+    positionToCenter();
   }
-
-  // function drawLine(x1, y1, x2, y2, lineColor) {
-  //   ctx.beginPath();
-  //   ctx.strokeStyle = lineColor || color;
-  //   ctx.lineWidth = lineWidth;
-  //   ctx.lineCap = 'round';
-  //   ctx.lineJoin = 'round';
-  //   ctx.moveTo(x2 || x1, y2 || y1);
-  //   ctx.lineTo(x1, y1);
-  //   ctx.stroke();
-  //   ctx.closePath();
-  // }
 
   function drawLine(x1, y1, x2, y2, lineColor) {
     line(x1, y1, x2, y2, setPixel);
@@ -183,7 +167,7 @@ export function Trails(points, canvas) {
 
   function destroy() {
     ctx.clearRect(0, 0, width, height);
-    // ctx = null;
+    ctx = null;
     traces = null;
     path = null;
   }
@@ -191,7 +175,7 @@ export function Trails(points, canvas) {
   return {
     destroy,
     update,
-    positionCenter,
+    positionToCenter,
     resize,
   };
 }
