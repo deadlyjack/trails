@@ -10,7 +10,6 @@ import Trace from './trace';
 // TODO: add option for width of the line
 
 /**
- * 
  * @param {SVGPathElement} SVGPath
  * @param {HTMLCanvasElement} canvas
  */

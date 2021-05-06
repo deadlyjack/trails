@@ -39,6 +39,6 @@ declare const Trails: {
   fromSVG(svg: String, canvas: HTMLCanvasElement):TrailsObject;
 }
 
-declare module 'trails' {
+declare module '@deadlyjack/trails' {
   export = Trails;
 }
