@@ -144,22 +144,22 @@ export function Trails(SVGPath, canvas) {
       trace.tails.add({ ...vector, oldX: trace.oldX, oldY: trace.oldY });
       const tailsLen = trace.tails.length;
       if (tailsLen) {
-        trace.tails.map((tail, i) => {
+        const { tails } = trace;
+        const tlen = tails.length;
+
+        for (let i = 0; i < tlen; ++i) {
+          const tail = tails[i];
           const randomIndex = Math.round(Math.random() * (irid.length - 1));
           let opacity = 1 - (i / tailsLen);
           opacity = opacity < 0.5 ? 0.5 : opacity;
-          let color = Array.isArray(irid)
-            ? irid[randomIndex]
-            : irid;
-
+          let color = Array.isArray(irid) ? irid[randomIndex] : irid;
           color = color.opacity(opacity).toRGBString();
           clearLine(tail.x, tail.y, tail.oldX, tail.oldY);
           drawLine(
             tail.x, tail.y, tail.oldX, tail.oldY,
             color,
           );
-          return tail;
-        });
+        }
       }
       trace.oldX = vector.x;
       trace.oldY = vector.y;
