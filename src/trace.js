@@ -9,49 +9,45 @@ import Vector from './vector';
  */
 export default function Trace(vertices, stepFactor = 1, speed) {
   let tracesAr = [];
+  const tracesLength = vertices.length;
+  for (let i = 0; i < tracesLength; i++) {
+    let points = vertices[i];
+    if (points) {
+      const traces = [];
+      const traceLength = points.length;
+      for (let i = 0; i < traceLength; i++) {
+        const vector = points[i];
+        const nextVector = i + 1 === traceLength ? points[0] : points[i + 1];
 
-  const mvertices = vertices;
+        let { x } = vector;
+        let { y } = vector;
+        const dx = x - nextVector.x;
+        const dy = y - nextVector.y;
 
-  mvertices.map((mvertex) => {
-    genTrace(mvertex);
-    return mvertex;
-  });
+        const steps =
+          stepFactor *
+          (Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) : Math.abs(dy));
 
-  function genTrace(traceVertices) {
-    if (!traceVertices) return;
-    const traces = [];
-    traceVertices.map((vector, i) => {
-      const nextVector = (i + 1) === traceVertices.length ? traceVertices[0] : traceVertices[i + 1];
+        const ix = -(dx / steps);
+        const iy = -(dy / steps);
 
-      let { x } = vector;
-      let { y } = vector;
-      const dx = x - nextVector.x;
-      const dy = y - nextVector.y;
-
-      const steps = stepFactor * (Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) : Math.abs(dy));
-
-      const ix = -(dx / steps);
-      const iy = -(dy / steps);
-
-      for (let i2 = 0; i2 < steps; ++i2) {
-        x += ix;
-        y += iy;
-        traces.push(Vector(parseInt(x, 10), parseInt(y, 10)));
+        for (let i2 = 0; i2 < steps; ++i2) {
+          x += ix;
+          y += iy;
+          traces.push(Vector(parseInt(x, 10), parseInt(y, 10)));
+        }
       }
-      return vector;
-    });
-    // const tailsLength = 10;
-    const tailsLength = parseInt((traces.length * (1 / speed)), 10);
+      // const tailsLength = 10;
+      const tailsLength = parseInt(traces.length * (1 / speed), 10);
 
-    tracesAr.push({
-      coords: traces,
-      tails: Tails(tailsLength < 10 ? 10 : tailsLength),
-    });
+      tracesAr.push({
+        coords: traces,
+        tails: Tails(tailsLength < 10 ? 10 : tailsLength),
+      });
+    }
   }
 
-  tracesAr = tracesAr.filter((traces) => !!traces.coords.length);
-
-  return tracesAr;
+  return tracesAr.filter((traces) => !!traces.coords.length);
 }
 
 /**
