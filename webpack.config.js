@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  mode: 'development',
+  mode: 'production',
   entry: {
     trails: './src/main.js',
   },

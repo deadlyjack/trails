@@ -28,6 +28,7 @@ export function Trails(SVGPath, canvas) {
   let scale = 1;
   let irid = Irid('#fff');
   let vertices = extractVertices(SVGPath);
+  let fill = 'transparent';
 
   reloadOptions();
   resize();
@@ -53,6 +54,9 @@ export function Trails(SVGPath, canvas) {
             break;
           case 'scale':
             scale = +val;
+            break;
+          case 'fill':
+            fill = val;
             break;
           case 'color':
             if (/,/.test(val)) {
@@ -228,7 +232,8 @@ function extractVertices(points) {
     const pointsAr = extractPoints.split(/[Zz]/g);
     const verticesAr = [];
 
-    for (let i = 0; i < pointsAr.length; ++i) {
+    const len = pointsAr.length;
+    for (let i = 0; i < len; ++i) {
       const pointAr = pointsAr[i];
       if (pointAr) {
         verticesAr.push(pathToVertices(pathToNode(`${pointAr}Z`)));
